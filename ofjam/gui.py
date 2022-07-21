@@ -748,6 +748,8 @@ class Ui_MainWindow(object):
         if platform.startswith('win32'):
             run("start /d \"{}\" hl2.exe -game \"{}\" -secure -steam {}".format(sdk,game,args), shell=True)
         else:
+            # Needed to run under the Steam Runtime
+            os.environ["SteamEnv"] = "1"
             #hl2 = "{sdk}\hl2_linux".format(sdk = sdkPath)
             #run([hl2, "-game", ofpath])
             Popen("\"{}/hl2.sh\" -game {} -secure -steam {}".format(sdk,game,args), shell=True)
